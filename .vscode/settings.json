@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "timer.h": "c",
+        "globals.h": "c",
+        "uart.h": "c",
+        "display_manager.h": "c",
+        "io_manager.h": "c"
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "configurations": [
+       {
+          "name": "AVR",
+          "includePath": [
+             "${workspaceFolder}/**",
+             "/opt/homebrew/Cellar/avr-gcc@12/12.2.0_3/avr/include/"
+          ],
+          "defines": [
+             "__AVR_ATmega128__"  // Define your MCU model
+          ],
+          "compilerPath": "/opt/homebrew/Cellar/avr-gcc@12/12.2.0_3/bin/avr-gcc",  // Path to avr-gcc
+          "cStandard": "c11",
+          "cppStandard": "c++17",
+          "intelliSenseMode": "gcc-x64"
+       }
+    ],
+    "version": 4
+ }

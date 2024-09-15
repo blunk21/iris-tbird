@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+         "label": "Build Deploy AVR",
+         "command": "make",
+         "args": [
+            "all"
+         ],
+         "problemMatcher": []
+      },
+      {
+         "label": "Upload to AVR",
+         "command": "make",
+         "args": ["flash","&&","make","clean"],
+         "problemMatcher": []
+      },
+      {
+         "label": "Build Debug AVR",
+         "command": "make",
+         "args": [
+            "all",
+            "DEBUG=1"
+         ],
+         "problemMatcher": []
+      },
+
+   ]
+ }
