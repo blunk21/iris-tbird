@@ -15,12 +15,13 @@ static FILE mystdout = FDEV_SETUP_STREAM(usart_putchar_printf, NULL, 0x0003);
 
 int main(void) {
     stdout = &mystdout;
-    DDRD |= _BV(0x80);
+
     init_uart(UBRR);
     clock_init_time();
     // initLM35();
-    initDisplayManager();
+    sevseg_init_display();
     init_timers();
+
     sei();
     // debug_printf("Sending this with debufprintf\r\n");
     while (1) {
