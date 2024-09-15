@@ -4,35 +4,47 @@
 
 
 
-typedef enum 
-{
-    TIME,
-    TEMP
-} Page;
 
+
+typedef enum { TIME, TEMP } Page;
 
 typedef struct sevseg_display {
-    Page current_page;
-    uint8_t digits[5];
-}sevseg_display_t;
+  Page current_page;
+} sevseg_display_t;
+
+
+/**
+ * @brief Get the sevseg display object
+ *
+ * @return sevseg_display_t*
+ */
+sevseg_display_t* sevseg_get_display(void);
 
 /**
  * @brief Initialize the display manager
  *
  */
-void initDisplayManager(void);
+void sevseg_init_display(void);
 
 /**
  * @brief Set the Current Page
  *
  * @param page
  */
-void setPage(Page page);
+void sevseg_set_page(Page page);
 
-uint8_t getCurrentPage();
+/**
+ * @brief Prints a number on the given digit of the sevseg display
+ *
+ * @param num
+ * @param dig
+ */
+void sevseg_print_num(uint8_t num, uint8_t dig);
 
-void printNum(uint8_t num, uint8_t dig);
-
+/**
+ * @brief Puts information on the sevseg display depending on current page
+ *
+ */
 void sevseg_refresh_display(void);
 
 #endif

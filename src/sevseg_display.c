@@ -4,35 +4,26 @@
 #include "uart.h"
 #include "clock.h"
 
-static uint8_t current_page = TIME;
 
-void initDisplayManager(void)
+sevseg_display_t* sevseg_get_display(void)
+{
+    static sevseg_display_t instance;
+    return  &instance;
+}
+
+void sevseg_init_display(void)
 {
     DDRA = 0xFF; // sevseg display
+    sevseg_display_t* pdisplay = sevseg_get_display();
+    pdisplay->current_page = TIME;
 }
 
-void setPage(Page page)
+void sevseg_set_page(Page page)
 {
-    switch (page)
-    {
-    case TIME:
-        /* code */
-        break;
-
-    case TEMP:
-        break;
-    default:
-        break;
-    }
-    current_page = page;
+    sevseg_get_display()->current_page = page;
 }
 
-uint8_t getCurrentPage()
-{
-    return current_page;
-}
-
-void printNum(uint8_t num, uint8_t dig)
+void sevseg_print_num(uint8_t num, uint8_t dig)
 {
     if (num > 9)
         return;
@@ -52,32 +43,32 @@ void sevseg_refresh_display(void)
     static uint8_t digit = 0;
     if (digit > 4)
         digit = 0;
-    if (getCurrentPage() == TIME)
+    if (sevseg_get_display()->current_page == TIME)
     {
         struct tm curr = clock_get_current_time();
         switch (digit)
         {
         case 0:
-            printNum(curr.tm_min % 10, digit);
+            sevseg_print_num(curr.tm_min % 10, digit);
             break;
         case 1:
-            printNum((curr.tm_min / 10) % 10, digit);
+            sevseg_print_num((curr.tm_min / 10) % 10, digit);
             break;
         case 2:
-            printNum(curr.tm_hour % 10, digit);
+            sevseg_print_num(curr.tm_hour % 10, digit);
             break;
         case 3:
-            printNum((curr.tm_hour / 10) % 10, digit);
+            sevseg_print_num((curr.tm_hour / 10) % 10, digit);
             break;
         case 4:
             if (curr.tm_sec % 2 == 0)
-                printNum(0, digit);
+                sevseg_print_num(0, digit);
             break;
         default:
             break;
         }
     }
-    else if (getCurrentPage() == TEMP)
+    else if (sevseg_get_display()->current_page == TEMP)
     {
     }
     digit++;

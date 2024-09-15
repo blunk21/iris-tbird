@@ -8,8 +8,7 @@ void init_clock_tick_timer(void)
 
 
     TCCR1B |= _BV(CS12) | _BV(WGM12); // 256 prescaler and CTC mode
-    OCR1AH = (0xF424>>8);
-    OCR1AL = 0xF424; // 1 sec 
+    OCR1A = CLOCK_TICK_OCR_VAL;
 
     TIMSK |= _BV(OCIE1A);
 }
