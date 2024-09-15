@@ -4,8 +4,8 @@
 #include "stdio.h"
 #include <avr/io.h>
 
-static uint16_t current_temp = 0, adcval = 0;
-static uint8_t *current_temp_string[5];
+static  int adcval = 0;
+
 
 char debugstring[100];
 
@@ -27,23 +27,4 @@ void taskPollTemp()
     ADCSRA |= _BV(ADSC);
     loop_until_bit_is_set(ADCSRA, ADIF);
     adcval = ADC;
-}
-
-void log_adc_val(uint16_t val)
-{
-    uint8_t printable_adc_val[50];
-    sprintf(printable_adc_val, "The ADC value is: %d\n", val);
-    uart_transmit_str(printable_adc_val);
-    uart_transmit_str("\n");
-}
-
-
-uint16_t getCurrentTemp()
-{
-    return current_temp;
-}
-
-uint8_t *getTempString()
-{
-    return current_temp_string;
 }

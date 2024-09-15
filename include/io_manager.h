@@ -21,22 +21,10 @@ void io_init_leds(void);
 
 void io_check_buttons();
 
-uint8_t io_getLastButtonPress();
+uint8_t io_get_last_pushbutton_pressed();
 
-void io_clearButtonPress();
+void io_clear_button_press();
 
-void io_syncIO();
-
-/**
- * @brief Task to check for a button press
- *
- */
-void taskButtonCheck(void);
-
-/**
- * @brief Task to control the actuators
- *
- */
-void taskManageActuators(void);
+void io_sync_io();
 
 #endif

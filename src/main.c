@@ -5,9 +5,12 @@
 #include <string.h>
 #include <stdbool.h>
 
+#include "clock.h"
 #include "globals.h"
 #include "uart.h"
 #include "timer.h"
+#include "sevseg_display.h"
+#include "io_manager.h"
 
 
 
@@ -25,7 +28,7 @@ int main(void) {
     sei();
     // debug_printf("Sending this with debufprintf\r\n");
     while (1) {
-        io_syncIO();
+        io_sync_io();
     }
     return 0;
 }
@@ -40,11 +43,4 @@ ISR(TIMER2_OVF_vect)
 ISR(TIMER1_COMPA_vect)
 {
     clock_tick_clock();
-}
-
-ISR(USART0_RX_vect)
-{
-    uint8_t data = UDR0;
-    write_buffer(data);
-    check_uart_error();
 }

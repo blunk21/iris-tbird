@@ -1,7 +1,6 @@
 #include "uart.h"
 #include "avr/io.h"
 
-uart_buffer rx_buffer;
 
 int usart_putchar_printf(char var, FILE* stream) {
 	// if (var == '\n') uartTransmitChar('\r');
@@ -10,9 +9,7 @@ int usart_putchar_printf(char var, FILE* stream) {
 }
 void init_uart(uint8_t ubrr)
 {
-	rx_buffer.head = 0;
-	rx_buffer.tail = 0;
-	rx_buffer.length = 0;
+
 	// Set Baud Rate
 	UBRR0H = (UBRR >> 8);
 	UBRR0L = UBRR;
@@ -32,9 +29,9 @@ void uart_transmit_char(uint8_t cp)
 		UDR0 = cp;
 }
 
-void uart_transmit_str(uint8_t* str)
+void uart_transmit_str(char* str)
 {
-	uint8_t* cp;
+	char* cp;
 	cp = str;
 	while (*cp)
 	{
@@ -53,54 +50,4 @@ void check_uart_error()
 		uart_transmit_str("Data overrun errori\n");
 	else if (bit_is_set(UCSR0A, UPE0))
 		uart_transmit_str("Parity error\n");
-}
-
-static uint8_t _buffer_is_full()
-{
-	if (rx_buffer.length == UART_BUFFER_SIZE)
-		return 1;
-	return 0;
-}
-
-static uint8_t _buffer_is_empty()
-{
-	if (rx_buffer.length == 0)
-		return 1;
-	return 0;
-}
-
-void write_buffer(uint8_t data)
-{
-	uint8_t full = _buffer_is_full();
-	if (full)
-	{
-		uart_transmit_str("buffer full\n");
-		return;
-	}
-	else
-	{
-		*(rx_buffer.buffer + rx_buffer.head) = data;
-		rx_buffer.head++;
-		rx_buffer.length++;
-	}
-	if (rx_buffer.head == UART_BUFFER_SIZE)
-	{
-		rx_buffer.head = 0;
-	}
-}
-
-uint8_t read_buffer(uint8_t* dest)
-{
-	uint8_t empty = _buffer_is_empty();
-	if (empty)
-	{
-		return 0;
-	}
-
-	*dest = *(rx_buffer.buffer + rx_buffer.tail);
-	rx_buffer.length--;
-	rx_buffer.tail++;
-	if (rx_buffer.tail == UART_BUFFER_SIZE)
-		rx_buffer.tail = 0;
-	return 1;
 }

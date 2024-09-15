@@ -2,6 +2,7 @@
 #include "sevseg_display.h"
 #include "uart.h"
 #include "io_manager.h"
+#include "clock.h"
 #include "globals.h"
 
 
@@ -46,18 +47,18 @@ void io_check_buttons()
     }
 }
 
-uint8_t io_getLastButtonPress()
+uint8_t io_get_last_pushbutton_pressed()
 {
     return push_button_pressed;
 }
 
-void io_clearButtonPress()
+void io_clear_button_press()
 {
     push_button_pressed = 0;
 }
 
-void io_syncIO(){
-    uint8_t pressed = io_getLastButtonPress();
+void io_sync_io(){
+    uint8_t pressed = io_get_last_pushbutton_pressed();
         if (pressed != 0)
         {
             switch (pressed)
@@ -77,7 +78,7 @@ void io_syncIO(){
             default:
                 break;
             }
-            io_clearButtonPress();
+            io_clear_button_press();
         }
     return;
 }
