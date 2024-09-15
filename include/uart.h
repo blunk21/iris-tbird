@@ -28,14 +28,13 @@ void init_uart(uint8_t);
  * @param cp
  */
 void uart_transmit_char(uint8_t);
-void uartReceive(void);
 
 /**
  * @brief Trnsmits a string via UART
  *
  * @param str
  */
-void uart_transmit_str(char *);
+void uart_transmit_str(char*);
 
 /**
  * @brief Checks the UART error registers

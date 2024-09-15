@@ -6,14 +6,14 @@
  * @brief Initialize ADC peripheral
  *
  */
-void initLM35();
+void tmpsensor_init();
 
 /**
  * @brief Initiates a conversion and stores a value in integer and string format.
  *
  */
 
-void taskPollTemp(void);
+void tmpsensor_measure_temp(void);
 
 
 

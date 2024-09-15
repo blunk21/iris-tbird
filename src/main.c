@@ -21,7 +21,7 @@ int main(void) {
 
     init_uart(UBRR);
     clock_init_time();
-    // initLM35();
+    // tmpsensor_init();
     sevseg_init_display();
     init_timers();
 

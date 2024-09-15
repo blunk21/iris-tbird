@@ -18,7 +18,7 @@ typedef struct sevseg_display {
  *
  * @return sevseg_display_t*
  */
-sevseg_display_t *sevseg_get_display(void);
+sevseg_display_t* sevseg_get_display(void);
 
 /**
  * @brief Initialize the display manager
@@ -35,15 +35,15 @@ void sevseg_set_page(Page page);
 
 /**
  * @brief Prints a number on the given digit of the sevseg display
- * 
- * @param num 
- * @param dig 
+ *
+ * @param num
+ * @param dig
  */
 void sevseg_print_num(uint8_t num, uint8_t dig);
 
 /**
  * @brief Puts information on the sevseg display depending on current page
- * 
+ *
  */
 void sevseg_refresh_display(void);
 

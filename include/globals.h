@@ -6,9 +6,9 @@
 #endif
 
 #ifdef DEBUG
-    #define debug_printf(...) printf(__VA_ARGS__)
+#define debug_printf(...) printf(__VA_ARGS__)
 #else
-    #define debug_printf(...) // Empty definition, no printing
+#define debug_printf(...) // Empty definition, no printing
 #endif
 
 #include <inttypes.h>
