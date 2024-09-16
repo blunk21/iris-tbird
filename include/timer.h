@@ -12,18 +12,18 @@
   * @brief Creates ticks to measure time
   *
   */
-void init_clock_tick_timer(void);
+void hwtimers_init_clock_tick_timer(void);
 
 /**
  * @brief Periodically refresh display
  *
  */
-void init_refresh_timer(void);
+void hwtimers_init_io_refresh_timer(void);
 
 /**
  * @brief Initialise timers
  *
  */
-void init_timers(void);
+void hwtimers_init(void);
 
 #endif
