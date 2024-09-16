@@ -23,10 +23,9 @@ int main(void) {
     clock_init_time();
     // tmpsensor_init();
     sevseg_init_display();
-    init_timers();
+    hwtimers_init();
 
     sei();
-    // debug_printf("Sending this with debufprintf\r\n");
     while (1) {
         io_sync_io();
     }

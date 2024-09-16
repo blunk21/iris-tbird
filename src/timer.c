@@ -3,7 +3,7 @@
 #include "timer.h"
 
 
-void init_clock_tick_timer(void)
+void hwtimers_init_clock_tick_timer(void)
 {
 
 
@@ -13,14 +13,14 @@ void init_clock_tick_timer(void)
     TIMSK |= _BV(OCIE1A);
 }
 
-void init_refresh_timer(void)
+void hwtimers_init_io_refresh_timer(void)
 {
-    TCCR2 |= _BV(CS22);
+    TCCR2 |= _BV(CS22); //1 msec
     TIMSK |= _BV(TOIE2);
 }
 
-void init_timers()
+void hwtimers_init()
 {
-    init_clock_tick_timer();
-    init_refresh_timer();
+    hwtimers_init_clock_tick_timer();
+    hwtimers_init_io_refresh_timer();
 }
